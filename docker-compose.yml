@@ -1,0 +1,22 @@
+services:
+  dev-db:
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: nest
+      POSTGRES_USER: rabah19000
+      POSTGRES_PASSWORD: 123456Aa
+
+    ports:
+      - '5434:5432'
+  test-db:
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: nest
+      POSTGRES_USER: rabah19000
+      POSTGRES_PASSWORD: 123456Aa
+
+    ports:
+      - '5435:5432'
+
+    # volumes:
+    #   - ./db_data:/var/lib/mysql

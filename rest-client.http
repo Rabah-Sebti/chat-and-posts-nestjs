@@ -1,0 +1,76 @@
+GET http://localhost:3000/
+
+### signin 
+POST http://localhost:3333/auth/sign-in
+Content-Type: application/json
+
+{
+    "email":"sebtirabah@gmail.com",
+    "password":"123456Aa/"
+}
+### signUp
+POST http://localhost:3333/auth/sign-up
+Content-Type: application/json
+
+{
+    "email":"sebtirabah@gmail.com",
+    "password":"123456Aa/"
+}
+
+### get all data
+GET http://localhost:3000/songs
+
+### get one
+GET http://localhost:3000/songs/12
+### update one
+PUT  http://localhost:3000/songs/1
+
+### delete one
+DELETE  http://localhost:3000/songs/1
+### create one
+POST  http://localhost:3333/posts
+Content-Type: application/json
+
+{
+    "title":"Song 1",
+    "artists":["Sami"],
+    "releasedDate":"2024-05-31",
+    "duration":"03:35"
+}
+### users
+### me
+ GET http://localhost:3333/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIwNzU0LCJleHAiOjE3MjMwMjE2NTR9.UkIZof9ZvNLTs-0beus1ncd5rcStZC7_UHjZfoXPzac
+### posts
+POST  http://localhost:3333/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIxNzI1LCJleHAiOjE3MjMwMjI2MjV9.YdM05gbpFGhhuLcjFqQbdOkL9NtqHusIqkvi-5IjU1k
+
+{
+    "content":"Content post 2",
+    "tag":"tag 2"
+}
+### get posts
+GET http://localhost:3333/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIzOTkxLCJleHAiOjE3MjMwNzc5OTF9.KPAlEXvZpqy3gPtIiiFU857nLDIcPscVqZzv-lFd6aE
+
+### user posts
+
+GET http://localhost:3333/posts/user-posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIxNzI1LCJleHAiOjE3MjMwMjI2MjV9.YdM05gbpFGhhuLcjFqQbdOkL9NtqHusIqkvi-5IjU1k
+
+### get one post
+GET http://localhost:3333/posts/66b339ae18a6043f81fa324f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIzOTkxLCJleHAiOjE3MjMwNzc5OTF9.KPAlEXvZpqy3gPtIiiFU857nLDIcPscVqZzv-lFd6aE
+
+### update
+PATCH http://localhost:3333/posts/66b339ae18a6043f81fa324e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIyMzM2ODg2ZGY1NjUyOTQxYTUwYjUiLCJlbWFpbCI6InNlYnRpcmFiYWhAZ21haWwuY29tIiwiaWF0IjoxNzIzMDIzOTkxLCJleHAiOjE3MjMwNzc5OTF9.KPAlEXvZpqy3gPtIiiFU857nLDIcPscVqZzv-lFd6aE
+
+{
+    "content":"updated Content post 2",
+    "tag":"update"
+}
