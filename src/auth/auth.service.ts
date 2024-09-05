@@ -1,6 +1,10 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AuthDto } from './dto';
+import { AuthDto, SignUpDto } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
@@ -12,13 +16,21 @@ export class AuthService {
     private jwt: JwtService,
     private config: ConfigService,
   ) {}
-  async signUp(dto: AuthDto) {
+  async signUp(dto: SignUpDto) {
     try {
       const hash = await argon.hash(dto.password);
+      const userExist = await this.prisma.user.findFirst({
+        where: {
+          email: dto.email,
+        },
+      });
+      if (userExist) throw new BadRequestException('Credentials taken');
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
           password: hash,
+          firstname: dto.firstname,
+          lastname: dto.lastname,
         },
       });
       delete user.password;
