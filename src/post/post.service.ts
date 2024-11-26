@@ -22,7 +22,8 @@ export class PostService {
     return post;
   }
 
-  async getAllPostsById(userId: string) {
+  async getAllPostsById(userId: string, page: number, pageSize: number) {
+    const skip = page * pageSize;
     const posts = await this.prisma.post.findMany({
       where: {
         createdBy: userId,
@@ -37,13 +38,20 @@ export class PostService {
             picture: true,
           },
         },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
       },
+      take: pageSize,
+      skip,
     });
     return posts;
   }
 
   async getAllPosts(search: string, page: number, pageSize: number) {
-    // const skip = (page - 1) * pageSize;
+    const skip = page * pageSize;
     const totalPosts = await this.prisma.post.count({
       where: {
         OR: [
@@ -79,6 +87,7 @@ export class PostService {
           },
         ],
       },
+
       include: {
         author: {
           select: {
@@ -89,7 +98,14 @@ export class PostService {
             picture: true,
           },
         },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
       },
+      skip,
+      take: pageSize,
     });
     return { posts, totalPosts };
   }
@@ -144,6 +160,9 @@ export class PostService {
       where: {
         id: postId,
       },
+      select: {
+        likes: true,
+      },
     });
     if (!post) {
       throw new NotFoundException('Post Not Found');
@@ -161,6 +180,9 @@ export class PostService {
       },
       data: {
         likes: newLikes,
+      },
+      select: {
+        likes: true,
       },
     });
     // return updatedPost;

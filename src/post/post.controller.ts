@@ -46,8 +46,18 @@ export class PostController {
   getPostsById(
     @Param('id')
     userId: string,
+    @Query(
+      'page',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    page: number,
+    @Query(
+      'pageSize',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    pageSize: number,
   ) {
-    return this.postService.getAllPostsById(userId);
+    return this.postService.getAllPostsById(userId, page, pageSize);
   }
 
   @Get(':id')
